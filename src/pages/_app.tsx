@@ -22,21 +22,9 @@ const App = ({ Component, pageProps }: any) => {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta
-          property="og:url"
-          content="https://bonik-react.vercel.app/landing"
-        />
         {/* thumbnail And title for social media */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="React Next JS Ecommerce Template" />
-        <meta
-          property="og:description"
-          content="Minimal, clean and Fast Next js ecommerce template. Build Super store, Grocery delivery app, Multivendor store and niche market"
-        />
-        <meta
-          property="og:image"
-          content="/assets/images/landing/preview.png"
-        />
+        <meta property="og:title" content="Homeclick Site Manager" />
 
         {/* Google analytics */}
         <script
@@ -63,17 +51,5 @@ const App = ({ Component, pageProps }: any) => {
     </ThemeProvider>
   );
 };
-
-// Only uncomment this method if you have blocking data requirements for
-// every single page in your application. This disables the ability to
-// perform automatic static optimization, causing every page in your app to
-// be server-side rendered.
-//
-// App.getInitialProps = async (appContext) => {
-//   // calls page's `getInitialProps` and fills `appProps.pageProps`
-//   const appProps = await App.getInitialProps(appContext);
-//
-//   return { ...appProps }
-// }
 
 export default App;

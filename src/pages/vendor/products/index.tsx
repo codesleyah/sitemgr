@@ -23,7 +23,9 @@ const Products = () => {
     const data = []
     await querySnapshot.then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
+        if(doc.data().isApproved === true){
         data.push(doc.data())
+        }
         console.log(data)
       })})
     setListings(data)
@@ -67,13 +69,13 @@ const Products = () => {
         <Link href={"#"} key={ind}>
           <TableRow as="a" href={"#"} my="1rem" padding="6px 18px">
             <FlexBox alignItems="center" m="6px">
-              <Avatar src={item.images[0]} size={36} />
+              <Avatar src={item.images? item.images[0] : ""} size={36} />
               <H5 textAlign="left" ml="20px">
                 {item.title.padStart(2, "0")}
               </H5>
             </FlexBox>
             <H5 m="6px" textAlign="left" fontWeight="400">
-              ${item.location}
+              {item.location}
             </H5>
             <H5 m="6px" textAlign="left" fontWeight="400">
               ${item.rent} / month

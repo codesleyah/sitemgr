@@ -29,7 +29,6 @@ const VendorDashboardNavigation = () => {
             </Box>
             <span>{item.title}</span>
           </FlexBox>
-          <span>{item.count}</span>
         </StyledDashboardNav>
       ))}
     </DashboardNavigationWrapper>
@@ -46,12 +45,10 @@ const linkList = [
     href: "/vendor/products",
     title: "Listings",
     iconName: "box",
-    count: 300,
   },
   {
     href: "/vendor/orders",
     title: "Applications",
-    count: 40,
   },
   {
     href: "/vendor/account-settings",

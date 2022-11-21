@@ -1,43 +1,54 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import FlexBox from "../FlexBox";
 import Hidden from "../hidden/Hidden";
 import Pagination from "../pagination/Pagination";
 import TableRow from "../TableRow";
 import { H5 } from "../Typography";
 import OrderRow from "./OrderRow";
+import { collection, getDocs } from "firebase/firestore";
+import { fireStore } from "../../firebase";
 
 export interface VendorOrderListProps {}
 
 const VendorOrderList: React.FC<VendorOrderListProps> = () => {
+
+  const [applications, setApplications] = useState([])
+  const querySnapshot =  getDocs(collection(fireStore, "applications"))
+
+  const getApplications = async () => {
+    const data = []
+    await querySnapshot.then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        data.push(doc.data())
+        console.log(data)
+      })})
+    setApplications(data)
+  }
+
+  useEffect(() => {
+      getApplications()
+  },[])
+
   return (
     <Fragment>
       <Hidden down={769}>
         <TableRow padding="0px 18px" boxShadow="none" bg="none">
           <H5 color="text.muted" my="0px" mx="6px" textAlign="left">
-            Tenand
+            Applicant Name
           </H5>
           <H5 color="text.muted" my="0px" mx="6px" textAlign="left">
-            Application Status
+            Phone number
+          </H5>
+          <H5 color="text.muted" my="0px" mx="6px" textAlign="left">
+            Email
           </H5>
           <H5 color="text.muted" my="0px" mx="6px" textAlign="left">
             Property
           </H5>
-          <H5 color="text.muted" my="0px" mx="6px" textAlign="left">
-            Owner
-          </H5>
-          <H5 color="text.muted" my="0px" mx="6px" textAlign="left">
-            Owner Phone
-          </H5>
-          <H5 color="text.muted" my="0px" mx="6px" textAlign="left">
-            Tenand Phone
-          </H5>
-          <H5 color="text.muted" my="0px" mx="6px" textAlign="left">
-            Date
-          </H5>
         </TableRow>
       </Hidden>
 
-      {orderList.map((item, ind) => (
+      {applications.map((item, ind) => (
         <OrderRow item={item} key={ind} />
       ))}
 
@@ -52,18 +63,5 @@ const VendorOrderList: React.FC<VendorOrderListProps> = () => {
     </Fragment>
   );
 };
-
-const orderList = [
-  {
-    apllicantname: "Elvin Kakomo",
-    status: "Pending",
-    date: new Date(),
-    property: "Full House",
-    owner: "Jarod jomu",
-    ownerphone: "0777 777 777",
-    tenandphone: "0777 777 777",
-  },
- 
-];
 
 export default VendorOrderList;
