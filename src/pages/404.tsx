@@ -35,7 +35,7 @@ const Error404 = () => {
         >
           Go Back
         </Button>
-        <Link href="/">
+        <Link href="/vendor/dashboard">
           <Button variant="contained" color="primary" m="0.5rem">
             Go to Home
           </Button>

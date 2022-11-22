@@ -133,7 +133,6 @@ const Navbar: React.FC<NavbarProps> = ({ }) => {
 
   return (
     <StyledNavbar>
-     
     </StyledNavbar>
   );
 };

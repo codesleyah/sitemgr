@@ -12,7 +12,7 @@ import FlexBox from "@component/FlexBox";
 
 
 
-const OrderDetails = () => {
+const NewListings = () => {
   const router = useRouter();
   const {title, location, rent, owner, phone, email, image1, image2, image3, description} = router.query;
   
@@ -86,6 +86,11 @@ const OrderDetails = () => {
           </FlexBox>
           <FlexBox alignItems="center" mb="1rem">
             <Button color="primary" bg="primary.light" px="2rem">
+              Approve Listing
+            </Button>
+          </FlexBox>
+          <FlexBox alignItems="center" mb="1rem">
+            <Button color="primary" bg="primary.light" px="2rem">
               Delete Listing
             </Button>
           </FlexBox>
@@ -96,6 +101,6 @@ const OrderDetails = () => {
   );
 };
 
-OrderDetails.layout = VendorDashboardLayout;
+NewListings.layout = VendorDashboardLayout;
 
-export default OrderDetails;
+export default NewListings;

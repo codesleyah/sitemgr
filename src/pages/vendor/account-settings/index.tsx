@@ -87,11 +87,25 @@ const AccountSettings = () => {
 
             <Hidden flex="0 0 0 !important" down={769}>
               <Typography textAlign="center" color="text.muted">
+              <Link href={{pathname: "/vendor/account-settings/new-listings",
+                          query:{
+                            title: item.title,
+                            location: item.location,
+                            rent: item.rent,
+                            owner: item.ownername + " " + item.ownersurname,
+                            phone: item.ownerphone,
+                            email: item.owneremail,
+                            image1: item.images[0]? item.images[0]:"",
+                            image2: item.images[1]? item.images[1]:"",
+                            image3: item.images[2]? item.images[2]:"",
+                            description: item.description
+                          }}}>
                 <IconButton size="small">
                   <Icon variant="small" defaultcolor="currentColor">
                     arrow-right
                   </Icon>
                 </IconButton>
+                </Link>
               </Typography>
             </Hidden>
           </TableRow>

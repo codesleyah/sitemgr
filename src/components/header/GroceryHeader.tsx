@@ -90,7 +90,6 @@ const GroceryHeader: React.FC<HeaderProps> = ({ className }) => {
             width={380}
             toggleSidenav={toggleSidenav}
           >
-            
           </Sidenav>
         </FlexBox>
       </Container>

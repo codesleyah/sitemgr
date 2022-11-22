@@ -21,9 +21,9 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
         height="100%"
       >
         <FlexBox className="logo" alignItems="center" mr="1rem">
-          <Link href="/">
+          <Link href="/vendor/dashboard">
             <a>
-              <Image src="" alt="logo" />
+              <Image src="assets/logos/react.png" alt="logo" />
             </a>
           </Link>
         </FlexBox>
