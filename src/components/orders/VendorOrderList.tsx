@@ -11,23 +11,26 @@ import { fireStore } from "../../firebase";
 export interface VendorOrderListProps {}
 
 const VendorOrderList: React.FC<VendorOrderListProps> = () => {
-
-  const [applications, setApplications] = useState([])
-  const querySnapshot =  getDocs(collection(fireStore, "applications"))
+  const [applications, setApplications] = useState([]);
+  const [applicationIds, setApplicationIds] = useState([]);
+  const querySnapshot = getDocs(collection(fireStore, "applications"));
 
   const getApplications = async () => {
-    const data = []
+    const data = [];
+    const ids = [];
     await querySnapshot.then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        data.push(doc.data())
-        console.log(data)
-      })})
-    setApplications(data)
-  }
+        data.push(doc.data());
+        ids.push(doc.id);
+      });
+    });
+    setApplications(data);
+    setApplicationIds(ids);
+  };
 
   useEffect(() => {
-      getApplications()
-  },[])
+    getApplications();
+  }, []);
 
   return (
     <Fragment>
@@ -43,13 +46,13 @@ const VendorOrderList: React.FC<VendorOrderListProps> = () => {
             Email
           </H5>
           <H5 color="text.muted" my="0px" mx="6px" textAlign="left">
-            Property
+            Property Id
           </H5>
         </TableRow>
       </Hidden>
 
       {applications.map((item, ind) => (
-        <OrderRow item={item} key={ind} />
+        <OrderRow item={item} _id={applicationIds[ind]} key={ind} />
       ))}
 
       <FlexBox justifyContent="center" mt="2.5rem">
