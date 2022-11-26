@@ -9,39 +9,43 @@ import Pagination from "@component/pagination/Pagination";
 import TableRow from "@component/TableRow";
 import Typography, { H5 } from "@component/Typography";
 import Link from "next/link";
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { fireStore } from "../../../firebase";
 
 const AccountSettings = () => {
-  const [listings, setListings] = useState([])
-  const querySnapshot =  getDocs(collection(fireStore, "properties"))
+  const [listings, setListings] = useState([]);
+  const [listingsId, setListingIds] = useState([]);
+  const querySnapshot = getDocs(collection(fireStore, "properties"));
 
   const getListings = async () => {
-    const data = []
+    const data = [];
+    const ids = [];
     await querySnapshot.then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        if(doc.data().isApproved === false){
-        data.push(doc.data())
+        if (doc.data().isApproved === false) {
+          data.push(doc.data());
+          ids.push(doc.id);
         }
-        console.log(data)
-      })})
-    setListings(data)
-  }
+      });
+    });
+    setListings(data);
+    setListingIds(ids);
+  };
 
   useEffect(() => {
-      getListings()
-  },[])
+    getListings();
+  }, []);
 
   return (
     <div>
-      <DashboardPageHeader title="Listings" />
+      <DashboardPageHeader title="New Listings" />
 
       <Hidden down={769}>
         <TableRow padding="0px 18px" mb="-0.125rem" boxShadow="none" bg="none">
-            <H5 ml="56px" color="text.muted" textAlign="left">
-              Title
-            </H5>
+          <H5 ml="56px" color="text.muted" textAlign="left">
+            Title
+          </H5>
           <H5 color="text.muted" my="0px" mx="6px" textAlign="left">
             Location
           </H5>
@@ -67,7 +71,7 @@ const AccountSettings = () => {
         <Link href={"#"} key={ind}>
           <TableRow as="a" href={"#"} my="1rem" padding="6px 18px">
             <FlexBox alignItems="center" m="6px">
-              <Avatar src={item.images? item.images[0] : ""} size={36} />
+              <Avatar src={item.images ? item.images[0] : ""} size={36} />
               <H5 textAlign="left" ml="20px">
                 {item.title.padStart(2, "0")}
               </H5>
@@ -87,24 +91,19 @@ const AccountSettings = () => {
 
             <Hidden flex="0 0 0 !important" down={769}>
               <Typography textAlign="center" color="text.muted">
-              <Link href={{pathname: "/vendor/account-settings/new-listings",
-                          query:{
-                            title: item.title,
-                            location: item.location,
-                            rent: item.rent,
-                            owner: item.ownername + " " + item.ownersurname,
-                            phone: item.ownerphone,
-                            email: item.owneremail,
-                            image1: item.images[0]? item.images[0]:"",
-                            image2: item.images[1]? item.images[1]:"",
-                            image3: item.images[2]? item.images[2]:"",
-                            description: item.description
-                          }}}>
-                <IconButton size="small">
-                  <Icon variant="small" defaultcolor="currentColor">
-                    arrow-right
-                  </Icon>
-                </IconButton>
+                <Link
+                  href={{
+                    pathname: "/vendor/account-settings/new-listings",
+                    query: {
+                      propertyId: listingsId[ind],
+                    },
+                  }}
+                >
+                  <IconButton size="small">
+                    <Icon variant="small" defaultcolor="currentColor">
+                      arrow-right
+                    </Icon>
+                  </IconButton>
                 </Link>
               </Typography>
             </Hidden>
@@ -123,7 +122,6 @@ const AccountSettings = () => {
     </div>
   );
 };
-
 
 AccountSettings.layout = VendorDashboardLayout;
 
