@@ -15,7 +15,7 @@ import FlexBox from "@component/FlexBox";
 const NewListings = () => {
   const router = useRouter();
   const {title, location, rent, owner, phone, email, image1, image2, image3, description} = router.query;
-  
+
   return (
     <div>
       <DashboardPageHeader
