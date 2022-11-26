@@ -14,16 +14,19 @@ export interface CustomerOrderListProps {}
 const CustomerOrderList: React.FC<CustomerOrderListProps> = () => {
 
   const [listings, setListings] = useState([])
+  const [applicationIds, setApplicationIds] = useState([]);
   const querySnapshot =  getDocs(collection(fireStore, "properties"))
 
   const getListings = async () => {
     const data = []
+    const ids = [];
     await querySnapshot.then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         data.push(doc.data())
-        console.log(data)
+        ids.push(doc.id)
       })})
     setListings(data)
+    setApplicationIds(ids);
   }
 
   useEffect(() => {
@@ -58,7 +61,7 @@ const CustomerOrderList: React.FC<CustomerOrderListProps> = () => {
       </Hidden>
 
       {listings.map((item, ind) => (
-        <OrderRow item={item} key={ind} />
+        <OrderRow item={item} _id={applicationIds[ind]} key={ind} />
       ))}
 
       <FlexBox justifyContent="center" mt="2.5rem">
