@@ -6,6 +6,7 @@ import {
   DashboardNavigationWrapper,
   StyledDashboardNav,
 } from "./DashboardStyle";
+import Image from "@component/Image";
 
 const VendorDashboardNavigation = () => {
   const { pathname } = useRouter();
@@ -19,6 +20,13 @@ const VendorDashboardNavigation = () => {
         height: 500,
       }}
     >
+      <div style={{ padding: 40 }}>
+        <Image
+          src="https://homeclick.vercel.app/assets/images/logo/log.png"
+          alt="log"
+          width={200}
+        />
+      </div>
       {linkList.map((item) => (
         <StyledDashboardNav
           isCurrentPath={pathname.includes(item.href)}
