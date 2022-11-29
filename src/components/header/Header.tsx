@@ -11,7 +11,6 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ className }) => {
-
   return (
     <StyledHeader className={className}>
       <Container
@@ -23,7 +22,11 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
         <FlexBox className="logo" alignItems="center" mr="1rem">
           <Link href="/vendor/dashboard">
             <a>
-              <Image src="assets/logos/react.png" alt="logo" />
+              <Image
+                src="https://homeclick.vercel.app/assets/images/logo/log.png"
+                alt="log"
+                height={50}
+              />
             </a>
           </Link>
         </FlexBox>

@@ -2,7 +2,6 @@ import Box from "@component/Box";
 import { useRouter } from "next/router";
 import React from "react";
 import FlexBox from "../FlexBox";
-import Icon from "../icon/Icon";
 import {
   DashboardNavigationWrapper,
   StyledDashboardNav,
@@ -22,11 +21,7 @@ const VendorDashboardNavigation = () => {
           mb="1.25rem"
         >
           <FlexBox alignItems="center">
-            <Box className="dashboard-nav-icon-holder">
-              <Icon variant="small" defaultcolor="currentColor" mr="10px">
-                {item.iconName}
-              </Icon>
-            </Box>
+            <Box className="dashboard-nav-icon-holder"></Box>
             <span>{item.title}</span>
           </FlexBox>
         </StyledDashboardNav>
@@ -39,12 +34,10 @@ const linkList = [
   {
     href: "/vendor/dashboard",
     title: "Dashboard",
-    iconName: "board",
   },
   {
     href: "/vendor/products",
     title: "Listings",
-    iconName: "box",
   },
   {
     href: "/vendor/orders",
@@ -52,8 +45,7 @@ const linkList = [
   },
   {
     href: "/vendor/account-settings",
-    title: "Newly added listings"
-    
+    title: "Newly added listings",
   },
 ];
 

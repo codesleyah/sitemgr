@@ -1,7 +1,5 @@
 import Footer from "@component/footer/Footer";
-import Header from "@component/header/Header";
 import MobileNavigationBar from "@component/mobile-navigation/MobileNavigationBar";
-import Sticky from "@component/sticky/Sticky";
 import Head from "next/head";
 import React from "react";
 import StyledAppLayout from "./AppLayoutStyle";
@@ -14,7 +12,7 @@ type Props = {
 const AppLayout: React.FC<Props> = ({
   children,
   navbar,
-  title = "React Next.js Ecommerce Template",
+  title = "Homeclick Admin Panel",
 }) => (
   <StyledAppLayout>
     <Head>
@@ -22,10 +20,6 @@ const AppLayout: React.FC<Props> = ({
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-
-    <Sticky fixedOn={0}>
-      <Header />
-    </Sticky>
 
     {navbar && <div className="section-after-sticky">{navbar}</div>}
     {!navbar ? (
