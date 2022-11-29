@@ -6,12 +6,30 @@ import Button from "../buttons/Button";
 import IconButton from "../buttons/IconButton";
 import Icon from "../icon/Icon";
 import TextField from "../text-field/TextField";
-import { H3, H5} from "../Typography";
+import { H3, H5 } from "../Typography";
 import { StyledSessionCard } from "./SessionStyle";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { firebaseAuth } from "../../firebase";
 
 const Login: React.FC = () => {
-  const [passwordVisibility, setPasswordVisibility] = useState(false);
   const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+
+  const loginUser = () => {
+    signInWithEmailAndPassword(firebaseAuth, email, password)
+      .then(() => {
+        //const user = userCredential.user;
+        router.push("/vendor/dashboard");
+        console.log("logged in");
+      })
+      .catch((error) => {
+        alert("logg in failed");
+        alert(error.mesage);
+      });
+  };
 
   const togglePasswordVisibility = useCallback(() => {
     setPasswordVisibility((visible) => !visible);
@@ -22,14 +40,7 @@ const Login: React.FC = () => {
     console.log(values);
   };
 
-  const {
-    values,
-    errors,
-    touched,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-  } = useFormik({
+  const { errors, touched } = useFormik({
     onSubmit: handleFormSubmit,
     initialValues,
     validationSchema: formSchema,
@@ -37,7 +48,7 @@ const Login: React.FC = () => {
 
   return (
     <StyledSessionCard mx="auto" my="2rem" boxShadow="large">
-      <form className="content" onSubmit={handleSubmit}>
+      <form className="content">
         <H3 textAlign="center" mb="0.5rem">
           Welcome To Home Click Site Manager
         </H3>
@@ -58,9 +69,7 @@ const Login: React.FC = () => {
           label="Email or Phone Number"
           type="email"
           fullwidth
-          onBlur={handleBlur}
-          onChange={handleChange}
-          value={values.email || ""}
+          onChange={(e) => setEmail(e.target.value)}
           errorText={touched.email && errors.email}
         />
         <TextField
@@ -85,9 +94,7 @@ const Login: React.FC = () => {
               </Icon>
             </IconButton>
           }
-          onBlur={handleBlur}
-          onChange={handleChange}
-          value={values.password || ""}
+          onChange={(e) => setPassword(e.target.value)}
           errorText={touched.password && errors.password}
         />
 
@@ -95,8 +102,10 @@ const Login: React.FC = () => {
           mb="1.65rem"
           variant="contained"
           color="primary"
-          type="submit"
           fullwidth
+          onClick={(e) => {
+            e.preventDefault(), loginUser();
+          }}
         >
           Login
         </Button>

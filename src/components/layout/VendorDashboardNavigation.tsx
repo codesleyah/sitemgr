@@ -7,10 +7,23 @@ import {
   StyledDashboardNav,
 } from "./DashboardStyle";
 import Image from "@component/Image";
+import { signOut } from "firebase/auth";
+import { firebaseAuth } from "../../firebase";
 
 const VendorDashboardNavigation = () => {
   const { pathname } = useRouter();
+  const router = useRouter();
 
+  function logout() {
+    signOut(firebaseAuth)
+      .then(() => {
+        router.push("/");
+      })
+      .catch((error) => {
+        alert("Logout Failed!");
+        alert(error.message);
+      });
+  }
   return (
     <DashboardNavigationWrapper
       px="0px"
@@ -41,6 +54,19 @@ const VendorDashboardNavigation = () => {
           </FlexBox>
         </StyledDashboardNav>
       ))}
+      <StyledDashboardNav
+        isCurrentPath={pathname.includes("#")}
+        href="#"
+        px="1.5rem"
+        mb="1.25rem"
+      >
+        <FlexBox alignItems="center">
+          <Box className="dashboard-nav-icon-holder"></Box>
+          <a onClick={logout}>
+            <span>Logout</span>
+          </a>
+        </FlexBox>
+      </StyledDashboardNav>
     </DashboardNavigationWrapper>
   );
 };
