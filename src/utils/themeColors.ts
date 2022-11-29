@@ -27,7 +27,7 @@ const bodyColor = {
 
 const primaryColor = {
   light: "#FFE1E6",
-  main: "#E94560",
+  main: "#1e2555",
   // dark: "#D23F57",
   dark: "#4F4CB6",
   text: "#ffffff",
@@ -48,7 +48,7 @@ const warningColor = {
   text: textColor.primary,
 };
 const errorColor = {
-  main: "#E94560",
+  main: "#1e2555",
   light: "#FFE1E6",
   text: textColor.primary,
 };
